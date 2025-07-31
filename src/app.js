@@ -18,6 +18,13 @@ import projectRouter from "./routes/project.route.js";
 app.use("/api/v1", userRouter);
 app.use("/api/v1", projectRouter);
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is healthy.",
+  });
+});
+
 // Error Middleware
 app.use(errorMiddleware);
 
