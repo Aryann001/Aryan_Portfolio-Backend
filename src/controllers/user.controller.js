@@ -223,3 +223,16 @@ export const deleteInStack = catchAsyncHandler(async (req, res, next) => {
 
   sendCookie(user, res, 200);
 });
+
+export const getUser = catchAsyncHandler(async (req, res, next) => {
+  const user = await User.findOne({});
+
+  if (!user) {
+    return next(new ErrorHandler("User not found", 400));
+  }
+
+  res.status(200).json({
+    success: true,
+    user,
+  });
+});

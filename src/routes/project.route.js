@@ -63,7 +63,7 @@ router
   .post(
     isAuthenticated,
     isAuthorized("admin"),
-    upload.fields([{ name: "thumbnail", maxCount: 1 }, { name: "snapshots" }]),
+    upload.fields([{ name: "thumbnail", maxCount: 1 }]),
     createProject
   );
 

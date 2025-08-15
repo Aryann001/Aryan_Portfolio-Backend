@@ -19,14 +19,14 @@ export const createProject = catchAsyncHandler(async (req, res, next) => {
 
   const { title, description, category, keyFeatures, stack, githubLink, live } =
     req.body;
-  const { thumbnail, snapshots } = req.files;
+  const { thumbnail } = req.files;
 
-  if (!thumbnail || !snapshots) {
+  if (!thumbnail) {
     return next(new ErrorHandler("Project all fields required", 400));
   }
 
   let thumbnailObj = {};
-  let snapshotsArr = [];
+  // let snapshotsArr = [];
 
   const result = await upload(thumbnail[0].path);
 
@@ -35,14 +35,14 @@ export const createProject = catchAsyncHandler(async (req, res, next) => {
     url: result.url,
   };
 
-  for (let i = 0; i < snapshots.length; i++) {
-    const response = await upload(snapshots[i].path);
+  // for (let i = 0; i < snapshots.length; i++) {
+  //   const response = await upload(snapshots[i].path);
 
-    snapshotsArr.push({
-      public_id: response.public_id,
-      url: response.url,
-    });
-  }
+  //   snapshotsArr.push({
+  //     public_id: response.public_id,
+  //     url: response.url,
+  //   });
+  // }
 
   const project = await Project.create({
     userId: req.user._id,
@@ -52,7 +52,6 @@ export const createProject = catchAsyncHandler(async (req, res, next) => {
     keyFeatures,
     stack,
     thumbnail: thumbnailObj,
-    snapshots: snapshotsArr,
     githubLink,
     live: live || "",
   });

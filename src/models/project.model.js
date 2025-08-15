@@ -38,18 +38,18 @@ const projectSchema = new mongoose.Schema(
         required: true,
       },
     },
-    snapshots: [
-      {
-        public_id: {
-          type: String,
-          required: true,
-        },
-        url: {
-          type: String,
-          required: true,
-        },
-      },
-    ],
+    // snapshots: [
+    //   {
+    //     public_id: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //     url: {
+    //       type: String,
+    //       required: true,
+    //     },
+    //   },
+    // ],
     githubLink: {
       type: String,
       required: [true, "Github link is required"],
